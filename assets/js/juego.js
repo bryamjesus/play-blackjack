@@ -9,6 +9,9 @@ let deck = [];
 const tipos = ['C', 'D', 'H', 'S'];
 const especiales = ['A', 'J', 'Q', 'K'];
 
+/**
+ * Esta funcion crea la baraja
+ */
 const crearDeck = () => {
   for (let i = 2; i <= 10; i++) {
     for (let tipo of tipos) {
@@ -20,8 +23,23 @@ const crearDeck = () => {
       deck.push(especial + tipo);
     }
   }
+  console.time('HOLA');
+  deck = _.shuffle(deck);
+  console.timeEnd('HOLA');
+  console.log(deck);
 };
 
 crearDeck();
 
-console.log(deck);
+const pedirCarta = () => {
+  if (deck.length === 0) {
+    throw 'No hay cartas en el deck';
+  }
+  const numRandom = Math.round(Math.random() * 52);
+  const carta = deck[numRandom];
+
+  deck.splice(numRandom, 1);
+  console.log({ numRandom, carta, deck });
+  return '';
+};
+pedirCarta();
